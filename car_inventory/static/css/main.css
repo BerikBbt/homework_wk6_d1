@@ -1,0 +1,15 @@
+/* Shop Page CSS */
+
+
+
+
+.shop-header {
+    background-image: url("https://wallpapers.com/images/featured/really-cool-cars-pictures-7gub7gjfes26vk0c.jpg");
+    background-size: center;
+    height: 700px;
+    color: white; 
+}
+
+.shop-stats {
+    color: white; 
+}
