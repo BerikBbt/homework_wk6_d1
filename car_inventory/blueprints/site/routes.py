@@ -2,7 +2,7 @@ from flask import Blueprint, flash, redirect, render_template, request
 
 
 #internal import 
-from car_inventory.models import Product, db 
+from car_inventory.models import Customer, Order, Product, db 
 from car_inventory.forms import ProductForm
 
 
@@ -16,11 +16,20 @@ site = Blueprint('site', __name__, template_folder='site_templates' )
 def shop():
 
    
-    allprods = Product.query.all() 
+    allprods = Product.query.all()
+    allcustomers = Customer.query.all()
+    allorders = Order.query.all()
+
+    shop_stats = {
+        'products' : len(allprods),
+        'sales' : sum([order.order_total for order in allorders]),
+        'customers' : len(allcustomers)
+    }
+ 
 
     our_class = "Best cars in the USA "
                             
-    return render_template('shop.html', shop=allprods, coolmessage = our_class )
+    return render_template('shop.html', shop=allprods, coolmessage = our_class, stats=shop_stats )
 
 
 @site.route('/shop/create', methods= ['GET', 'POST'])
